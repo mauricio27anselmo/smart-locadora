@@ -11,8 +11,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "SMT_CLIENTE")
 public class Cliente{
-
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_cliente")

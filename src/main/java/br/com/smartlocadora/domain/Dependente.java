@@ -8,8 +8,6 @@ import java.util.Objects;
 @Table(name = "SMT_DEPENDENTE")
 public class Dependente implements Serializable {
 
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_dependente")

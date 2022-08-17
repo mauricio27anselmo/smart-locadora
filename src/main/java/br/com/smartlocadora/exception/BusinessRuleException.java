@@ -1,6 +1,6 @@
 package br.com.smartlocadora.exception;
 
-public class BusinessRuleException extends RuntimeException{
+public class BusinessRuleException extends Exception{
 
     public BusinessRuleException(String message) {
         super(message);
