@@ -1,8 +1,6 @@
 package br.com.smartlocadora.service.impl;
 
-import br.com.smartlocadora.beans.ClienteDTO;
 import br.com.smartlocadora.domain.Cliente;
-import br.com.smartlocadora.exception.NotFoundObjectException;
 import br.com.smartlocadora.repository.ClienteRepository;
 import br.com.smartlocadora.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,22 +8,21 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
-public class ClienteServiceImpl extends IServiceImpl implements ClienteService {
+public class ClienteServiceImpl implements ClienteService {
 
     @Autowired
     private ClienteRepository repository;
 
     @Override
-    public List<ClienteDTO> listAll() {
-        return repository.findAll().stream().map(ClienteDTO::new).collect(Collectors.toList());
+    public List<Cliente> listAll() {
+        return repository.findAll();
     }
 
     @Override
-    public ClienteDTO find(Long id) {
-        return repository.findById(id).map(ClienteDTO::new).orElseThrow(() -> new NotFoundObjectException(getMessage("br.com.smartlocadora.cliente.notFound")));
+    public Cliente find(Long id) {
+        return repository.findById(id).orElse(new Cliente());
     }
 
     @Override
@@ -34,21 +31,20 @@ public class ClienteServiceImpl extends IServiceImpl implements ClienteService {
         repository.findById(id).map(e -> {
             repository.deleteById(id);
             return Void.TYPE;
-        }).orElseThrow(() -> new NotFoundObjectException(getMessage("br.com.smartlocadora.cliente.notFound")));
+        });
     }
 
     @Override
     @Transactional
-    public Long insert(ClienteDTO entity) {
-        Cliente cliente = entity.convertToDomain();
-        return repository.save(cliente).getId();
+    public Cliente insert(Cliente entity) {
+        return repository.save(entity);
     }
 
     @Override
     @Transactional
-    public void update(Long id, ClienteDTO entity) {
-        repository.findById(id).map(e ->
-                repository.saveAndFlush(entity.convertToDomain()))
-                .orElseThrow(() -> new NotFoundObjectException(getMessage("br.com.smartlocadora.cliente.notFound")));
+    public Cliente update(Cliente entity) {
+        return repository.save(entity);
     }
+
+
 }

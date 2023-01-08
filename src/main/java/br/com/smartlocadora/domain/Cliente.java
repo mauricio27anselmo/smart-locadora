@@ -1,9 +1,9 @@
 package br.com.smartlocadora.domain;
 
-import br.com.smartlocadora.beans.ClienteDTO;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
@@ -11,38 +11,40 @@ import java.util.Objects;
 @Entity
 @Table(name = "SMT_CLIENTE")
 public class Cliente{
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_cliente")
     private Long id;
 
     @Column(name = "nome", nullable = false)
+    @JsonProperty("name")
     private String nome;
 
     @Column(name = "data_nascimento", nullable = false)
+    @JsonProperty("birthdate")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataNascimento;
 
     @Column(name = "endereco")
+    @JsonProperty("address")
     private String endereco;
 
     @Column(name="cpf", nullable = false, unique = true, length = 11)
     private String cpf;
 
     @Column(name="email", nullable = false)
+    @JsonProperty("mail")
     private String email;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "SMT_CLIENTE_DEPENDENTE",
             joinColumns = {@JoinColumn(name = "id_cliente")},
             inverseJoinColumns = {@JoinColumn(name = "id_dependente")})
+    @JsonProperty("dependents")
     private List<Dependente> dependentes;
 
     public Cliente() {
-    }
-
-    public Cliente(ClienteDTO clienteDTO){
-
     }
 
     public Long getId() {
@@ -99,35 +101,5 @@ public class Cliente{
 
     public void setDependentes(List<Dependente> dependentes) {
         this.dependentes = dependentes;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Cliente)) return false;
-        Cliente cliente = (Cliente) o;
-        return Objects.equals(getId(), cliente.getId()) &&
-                Objects.equals(getNome(), cliente.getNome()) &&
-                Objects.equals(getDataNascimento(), cliente.getDataNascimento()) &&
-                Objects.equals(getEndereco(), cliente.getEndereco()) &&
-                Objects.equals(getCpf(), cliente.getCpf()) &&
-                Objects.equals(getEmail(), cliente.getEmail());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getNome(), getDataNascimento(), getEndereco(), getCpf(), getEmail());
-    }
-
-    @Override
-    public String toString() {
-        return "Cliente{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", dataNascimento=" + dataNascimento +
-                ", endereco='" + endereco + '\'' +
-                ", cpf='" + cpf + '\'' +
-                ", email='" + email + '\'' +
-                '}';
     }
 }

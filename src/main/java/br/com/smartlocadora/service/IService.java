@@ -7,6 +7,6 @@ public interface IService<T> {
     List<T> listAll();
     T find(Long id);
     void delete(Long id);
-    Long insert(T entity);
-    void update(Long id, T entity);
+    T insert(T entity);
+    T update(T entity);
 }
