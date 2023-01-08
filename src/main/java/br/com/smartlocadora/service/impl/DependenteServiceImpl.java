@@ -1,8 +1,8 @@
 package br.com.smartlocadora.service.impl;
 
-import br.com.smartlocadora.domain.Cliente;
-import br.com.smartlocadora.repository.ClienteRepository;
-import br.com.smartlocadora.service.ClienteService;
+import br.com.smartlocadora.domain.Dependente;
+import br.com.smartlocadora.repository.DependenteRepository;
+import br.com.smartlocadora.service.DependenteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,19 +10,19 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-public class ClienteServiceImpl implements ClienteService {
+public class DependenteServiceImpl implements DependenteService {
 
     @Autowired
-    private ClienteRepository repository;
+    private DependenteRepository repository;
 
     @Override
-    public List<Cliente> listAll() {
+    public List<Dependente> listAll() {
         return repository.findAll();
     }
 
     @Override
-    public Cliente find(Long id) {
-        return repository.findById(id).orElse(new Cliente());
+    public Dependente find(Long id) {
+        return repository.findById(id).orElse(new Dependente());
     }
 
     @Override
@@ -36,18 +36,16 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     @Transactional
-    public Cliente insert(Cliente entity) {
+    public Dependente insert(Dependente entity) {
         return repository.save(entity);
     }
 
     @Override
     @Transactional
-    public void update(Cliente entity) {
+    public void update(Dependente entity) {
         repository.findById(entity.getId()).map(e -> {
             repository.save(entity);
             return Void.TYPE;
         });
     }
-
-
 }

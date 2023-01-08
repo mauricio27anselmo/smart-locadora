@@ -8,5 +8,5 @@ public interface IService<T> {
     T find(Long id);
     void delete(Long id);
     T insert(T entity);
-    T update(T entity);
+    void update(T entity);
 }
