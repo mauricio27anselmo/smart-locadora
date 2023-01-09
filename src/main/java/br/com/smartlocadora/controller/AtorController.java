@@ -42,16 +42,16 @@ public class AtorController implements ISmartLocadoraController<Ator> {
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Override
-    public Ator insert(@RequestBody Ator dependent) {
-        return getService().insert(dependent);
+    public Ator insert(@RequestBody Ator object) {
+        return getService().insert(object);
     }
 
     @ResponseBody
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Override
-    public void update(Ator dependent) {
-        getService().update(dependent);
+    public void update(Ator object) {
+        getService().update(object);
     }
 
     @ResponseBody

@@ -6,7 +6,7 @@ public interface ISmartLocadoraController<T> {
 
     List<T> listAll();
     T find(Long id);
-    T insert(T entity);
-    void update(T entity);
+    T insert(T object);
+    void update(T object);
     void delete(Long id);
 }

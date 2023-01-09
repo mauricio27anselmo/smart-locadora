@@ -42,16 +42,16 @@ public class ClienteController implements ISmartLocadoraController<Cliente> {
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Override
-    public Cliente insert(@RequestBody Cliente client) {
-        return getService().insert(client);
+    public Cliente insert(@RequestBody Cliente object) {
+        return getService().insert(object);
     }
 
     @ResponseBody
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Override
-    public void update(Cliente client) {
-        getService().update(client);
+    public void update(Cliente object) {
+        getService().update(object);
     }
 
     @ResponseBody

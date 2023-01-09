@@ -42,16 +42,16 @@ public class DependenteController implements ISmartLocadoraController<Dependente
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Override
-    public Dependente insert(@RequestBody Dependente dependent) {
-        return getService().insert(dependent);
+    public Dependente insert(@RequestBody Dependente object) {
+        return getService().insert(object);
     }
 
     @ResponseBody
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Override
-    public void update(Dependente dependent) {
-        getService().update(dependent);
+    public void update(Dependente object) {
+        getService().update(object);
     }
 
     @ResponseBody
