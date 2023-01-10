@@ -4,47 +4,41 @@ import br.com.smartlocadora.domain.Ator;
 import br.com.smartlocadora.repository.AtorRepository;
 import br.com.smartlocadora.service.AtorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
 @Service
-public class AtorServiceImpl implements AtorService {
+public class AtorServiceImpl extends SmartLocadoraServiceImpl<Ator> implements AtorService {
 
     @Autowired
     private AtorRepository repository;
 
     @Override
-    public List<Ator> listAll() {
-        return repository.findAll();
+    public JpaRepository<Ator, Long> getRepository() {
+        return this.repository;
     }
 
     @Override
     public Ator find(Long id) {
-        return repository.findById(id).orElse(new Ator());
+        return getRepository().findById(id).orElse(new Ator());
     }
 
     @Override
     @Transactional
     public void delete(Long id) {
-        repository.findById(id).map(e -> {
-            repository.deleteById(id);
+        getRepository().findById(id).map(e -> {
+            getRepository().deleteById(id);
             return Void.TYPE;
         });
     }
 
     @Override
     @Transactional
-    public Ator insert(Ator entity) {
-        return repository.save(entity);
-    }
-
-    @Override
-    @Transactional
     public void update(Ator entity) {
-        repository.findById(entity.getId()).map(e -> {
-            repository.save(entity);
+        getRepository().findById(entity.getId()).map(e -> {
+            getRepository().save(entity);
             return Void.TYPE;
         });
     }
