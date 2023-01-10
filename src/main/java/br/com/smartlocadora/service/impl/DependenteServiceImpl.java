@@ -27,15 +27,6 @@ public class DependenteServiceImpl extends SmartLocadoraServiceImpl<Dependente> 
 
     @Override
     @Transactional
-    public void delete(Long id) {
-        getRepository().findById(id).map(e -> {
-            getRepository().deleteById(id);
-            return Void.TYPE;
-        });
-    }
-
-    @Override
-    @Transactional
     public void update(Dependente entity) {
         getRepository().findById(entity.getId()).map(e -> {
             getRepository().save(entity);

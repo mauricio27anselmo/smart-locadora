@@ -27,15 +27,6 @@ public class AtorServiceImpl extends SmartLocadoraServiceImpl<Ator> implements A
 
     @Override
     @Transactional
-    public void delete(Long id) {
-        getRepository().findById(id).map(e -> {
-            getRepository().deleteById(id);
-            return Void.TYPE;
-        });
-    }
-
-    @Override
-    @Transactional
     public void update(Ator entity) {
         getRepository().findById(entity.getId()).map(e -> {
             getRepository().save(entity);

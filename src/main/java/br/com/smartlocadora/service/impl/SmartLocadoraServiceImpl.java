@@ -17,7 +17,12 @@ public abstract class SmartLocadoraServiceImpl<T> implements IService<T> {
     public abstract T find(Long id);
 
     @Transactional
-    public abstract void delete(Long id);
+    public void delete(Long id){
+        getRepository().findById(id).map(e -> {
+            getRepository().deleteById(id);
+            return Void.TYPE;
+        });
+    }
 
     @Transactional
     public  T insert(T entity) {
